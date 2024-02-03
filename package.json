@@ -12,8 +12,10 @@
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
+    "discord-webhook-node": "^1.1.8",
     "express": "^4.18.2",
     "express.js": "^1.0.0",
-    "expressjs": "^1.0.1"
+    "expressjs": "^1.0.1",
+    "isomorphic-fetch": "^3.0.0"
   }
 }
