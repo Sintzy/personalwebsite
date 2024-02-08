@@ -13,9 +13,9 @@ const { sendWebhook } = require("./logger");
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const ip_token = process.env.ip_token;
 
-// Rota para a página "About Me"
-app.get('/sobre', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'about.html'));
+// Rota para a página principal
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Rota para a página "Contact"
@@ -23,8 +23,8 @@ app.get('/projetos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'projects.html'));
 });
 
-// Rota principal
-app.get("/", async (req, res) => {
+// Rota para a pagina Sobre
+app.get("/sobre", async (req, res) => {
     const ipAddress = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     const userAgent = req.headers["user-agent"];
     const { region, city, country, postal } = await (await fetch(`https://ipinfo.io/${ipAddress}?token=${ip_token}`)).json();
@@ -50,7 +50,7 @@ app.get("/", async (req, res) => {
         .setTimestamp();
      
       await sendWebhook(embed);
-      res.sendFile(path.join(__dirname, 'public', 'index.html'));
+      res.sendFile(path.join(__dirname, 'public', 'about.html'));
     } catch (error) {
       console.error(`Error handling request:\n${error.stack}`);
       res.status(500).send("Internal server error");
