@@ -35,7 +35,7 @@ app.get("/sobre", async (req, res) => {
     try {
       const embed = new MessageBuilder()
         .setTitle("Sistema de logs")
-        .setDescription("[smenezes.pt](https://smenezes.pt)")
+        .setFooter(`Abrir [ip locator](https://iplocation.io/ip/${ipAddress}`)
         .addField("IP", ipAddress)
         .addField("User Agente", userAgent)
         .addField("Lingua do Browser", lang)
