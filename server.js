@@ -72,6 +72,7 @@ app.get("/sobre", async (req, res) => {
     const browser = userAgent ? userAgent.split("/")[0] : "Desconhecido?";
     try {
       const embed = new MessageBuilder()
+<<<<<<< HEAD
         .setTitle("smenezes.pt - logs")
         .addField("> **Pais: **", pais)
         .addField("> **Cidade: **", cidade || "Sem dados")
@@ -82,6 +83,21 @@ app.get("/sobre", async (req, res) => {
         .addField("> **Plataforma**", platforma || "Sem dados")
         .addField("> **Link para o IP Locator**", `[ABRIR LINK](https://iplocation.io/ip/${ip})` || "Sem dados")
         .setColor("#f37a0c")
+=======
+        .setTitle("Sistema de logs")
+        .setFooter(`Abrir [ip locator](https://iplocation.io/ip/${ipAddress}`)
+        .addField("IP", ipAddress)
+        .addField("User Agente", userAgent)
+        .addField("Lingua do Browser", lang)
+        .addField("Platforma", platform)
+        .addField("Browser", browser)
+        .addField("Proxy/VPN", isProxy ? "Sim" : "Não")
+        .addField("Pais", country || "Sem dados")
+        .addField("Região", region || "Sem dados")
+        .addField("Cidade", city || "Sem dados")
+        .addField("Codigo Postal", postal || "Sem dados")
+        .setColor("ORANGE")
+>>>>>>> 6dbd245801b3396fac3084c7186185abbb16c5e3
         .setTimestamp();
      
       await sendWebhook(embed);
