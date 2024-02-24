@@ -52,19 +52,19 @@ app.get("/sobre", async (req, res) => {
         operadoraorg = data1.org;
         timezone = data1.timezone;
         totalISP = data1.as;
-        ip = data.query;
+        ip = data1.query;
       })
     const userAgent = req.headers["user-agent"];
     const platforma = userAgent ? userAgent.split("(")[1].split(")")[0] : "Desconhecido?";
     try {
       const embed = new MessageBuilder()
         .setTitle("smenezes.pt - logs")
-        .addField("> **Pais: **", pais)
+        .addField("> **Pais: **", pais || "Sem dados")
         .addField("> **Cidade: **", cidade || "Sem dados")
         .addField("> **Codigo Postal: **", codigopostal || "Sem dados")
         .addField("> **Coordenadas: **", coordenadas || "Sem dados")
         .addField("> **Operadora: **", totalISP || "Sem dados")
-        .addField("> **IP: **", ip || "Sem dados")
+        .addField("> **IP: **", ipAddress || "Sem dados")
         .addField("> **Plataforma**", platforma || "Sem dados")
         .addField("> **Link para o IP Locator**", `[ABRIR LINK](https://iplocation.io/ip/${ip})` || "Sem dados")
         .setColor("#f37a0c")
