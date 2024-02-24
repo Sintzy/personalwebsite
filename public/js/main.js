@@ -8,3 +8,4 @@ window.addEventListener("focus", () => {
 })
 
 console.log('%cNão escreva códigos aqui se não sabe o que está a fazer', 'color: red; font-size: 20px; font-weight: bold;');
+
