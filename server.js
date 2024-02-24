@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const app = express();
+const { Webhook, MessageBuilder } = require("discord-webhook-node");  
 const port = process.env.PORT || 80;
 // Define o diretório estático para funfar os arquivos HTML e CSS
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,13 +32,15 @@ app.get('/projetos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'projects.html'));
 });
 
-// Situação para ter o ip publico
-http.get('http://api.ipify.org', (resp) => {
-  let data = '';
-  resp.on('data', (chunk) => {
-    data += chunk;
-    var ip = data
-    fetch(`http://ip-api.com/json/${data}`)
+
+
+
+
+// Rota para a pagina Sobre
+app.get("/sobre", async (req, res) => {
+    
+    const ipAddress = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    fetch(`http://ip-api.com/json/${ipAddress}`)
       .then(response => response.json())
           .then(data1 => {
         pais = data1.country;
@@ -50,24 +53,9 @@ http.get('http://api.ipify.org', (resp) => {
         timezone = data1.timezone;
         totalISP = data1.as;
         ip = data.query;
-})
-  });
-  resp.on('end', () => {
-    ip = data
-  });
-}).on("error", (err) => {
-});
-
-
-
-// Rota para a pagina Sobre
-app.get("/sobre", async (req, res) => {
-    
-
+      })
     const userAgent = req.headers["user-agent"];
-    const browserlang = req.headers["accept-language"]?.split(",")[0] || "Desconhecido?";
     const platforma = userAgent ? userAgent.split("(")[1].split(")")[0] : "Desconhecido?";
-    const browser = userAgent ? userAgent.split("/")[0] : "Desconhecido?";
     try {
       const embed = new MessageBuilder()
         .setTitle("smenezes.pt - logs")
