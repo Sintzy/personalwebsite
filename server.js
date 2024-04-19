@@ -32,8 +32,9 @@ app.get('/projetos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'projects.html'));
 });
 
-
-
+app.get('/pfp.png', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'pfp.png'));
+});
 
 
 // Rota para a pagina Sobre
